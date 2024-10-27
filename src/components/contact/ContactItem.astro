@@ -1,0 +1,33 @@
+---
+const { label, value, description } = Astro.props as ContactEntry
+---
+
+<button
+  class='flex w-full cursor-pointer flex-col items-start p-6 transition-colors duration-150 hover:bg-foreground/10 focus:bg-foreground/10 focus:outline-none'
+  data-contact
+>
+  <div class='flex w-full gap-2'>
+    <h3 class='text-xl font-bold italic'>{label}:</h3>
+    <p class='text-lg' data-contact>{value}</p>
+  </div>
+  <p class='text-sm'>{description}</p>
+</button>
+
+<script>
+  document.querySelectorAll('[data-contact]').forEach((button: Element) => {
+    button.addEventListener('click', function (this: HTMLButtonElement) {
+      const contactText = this.querySelector('p')?.textContent ?? ''
+      navigator.clipboard.writeText(contactText)
+
+      const p = this.querySelector('p')
+      if (!p) return
+
+      const originalText = p.textContent ?? ''
+      p.textContent = 'Copied!'
+
+      setTimeout(() => {
+        p.textContent = originalText
+      }, 1000)
+    })
+  })
+</script>
