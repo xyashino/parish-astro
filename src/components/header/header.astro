@@ -2,20 +2,20 @@
 import {getNavigation} from "../../services/get-navigation";
 import CrossIcon from "../icons/CrossIcon.astro";
 import {DesktopNavigation} from "./desktop-navigation";
-import ThemeToggle from "./theme-toggle.astro";
+import {MobileNavigation} from "./mobile-navigation";
 
 const navigation = (await getNavigation()) || [];
 ---
 
 <nav
-  class='mb-10 flex min-h-10 w-full justify-around items-center border-b pb-5 pt-4 sm:min-h-14'
+  class='mb-10 flex min-h-10 w-full items-center justify-between border-b pb-5 pt-4 sm:min-h-14 lg:justify-around px-4'
 >
-  <a class='text-foreground flex items-center group' href='/'>
+  <a class='group flex items-center text-foreground' href='/'>
     <CrossIcon class='size-6' />
-    <span class='text-xl translate-y-[10%] group-hover:underline'
+    <span class='translate-y-[10%] text-xl group-hover:underline'
       >Parafia Gruszow Wielki</span
     >
   </a>
   <DesktopNavigation client:only='react' data={navigation} />
-  <ThemeToggle class:list='hidden lg:block' />
+  <MobileNavigation client:only='react' data={navigation} />
 </nav>

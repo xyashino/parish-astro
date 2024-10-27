@@ -2,7 +2,9 @@ import { NavigationMenuLink } from '@/components/ui/navigation-menu'
 import { cn } from '@/lib/utils'
 import type { ComponentProps, PropsWithChildren } from 'react'
 
-type ListItemProps = PropsWithChildren<ComponentProps<'a'> & { title: string, joinCols?: boolean }>
+type ListItemProps = PropsWithChildren<
+  ComponentProps<'a'> & { title: string; joinCols?: boolean }
+>
 
 export const NavigationListItem = ({
   className,
