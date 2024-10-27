@@ -1,0 +1,21 @@
+---
+import {getNavigation} from "../../services/get-navigation";
+import CrossIcon from "../icons/CrossIcon.astro";
+import {DesktopNavigation} from "./desktop-navigation";
+import ThemeToggle from "./theme-toggle.astro";
+
+const navigation = (await getNavigation()) || [];
+---
+
+<nav
+  class='mb-10 flex min-h-10 w-full justify-around items-center border-b pb-5 pt-4 sm:min-h-14'
+>
+  <a class='text-foreground flex items-center group' href='/'>
+    <CrossIcon class='size-6' />
+    <span class='text-xl translate-y-[10%] group-hover:underline'
+      >Parafia Gruszow Wielki</span
+    >
+  </a>
+  <DesktopNavigation client:only='react' data={navigation} />
+  <ThemeToggle class:list='hidden lg:block' />
+</nav>
