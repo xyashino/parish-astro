@@ -1,0 +1,22 @@
+{
+  "name": "astro-parish",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "tinacms dev -c \"astro dev\"",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "astro": "^4.16.7",
+    "tinacms": "^2.3.0",
+    "typescript": "^5.6.3"
+  },
+  "devDependencies": {
+    "@tinacms/cli": "^1.6.10",
+    "@types/node": "^22.8.1"
+  }
+}
