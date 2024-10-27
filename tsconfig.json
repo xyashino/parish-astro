@@ -3,9 +3,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"],
+      "@tina/*": ["./tina/*"]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"
