@@ -9,284 +9,85 @@
     "meta": { "flags": ["experimentalData"] },
     "collections": [
       {
-        "name": "posts",
-        "label": "Aktualności",
-        "path": "content/posts",
+        "name": "navigation",
+        "label": "Nawigacja",
+        "path": "content/navigation",
+        "format": "json",
+        "ui": {
+          "filename": { "readonly": true },
+          "allowedActions": { "create": false, "delete": false }
+        },
         "fields": [
-          {
-            "type": "string",
-            "name": "title",
-            "label": "Tytuł",
-            "namespace": ["posts", "title"],
-            "searchable": true,
-            "uid": false
-          },
-          {
-            "type": "datetime",
-            "name": "date",
-            "label": "Data publikacji",
-            "namespace": ["posts", "date"],
-            "searchable": true,
-            "uid": false
-          },
-          {
-            "type": "image",
-            "name": "image",
-            "label": "Zdjęcie główne",
-            "namespace": ["posts", "image"],
-            "searchable": false,
-            "uid": false
-          },
-          {
-            "type": "string",
-            "name": "category",
-            "label": "Kategoria",
-            "namespace": ["posts", "category"],
-            "searchable": true,
-            "uid": false
-          },
-          {
-            "type": "rich-text",
-            "name": "body",
-            "label": "Treść",
-            "isBody": true,
-            "namespace": ["posts", "body"],
-            "searchable": true,
-            "parser": { "type": "markdown" },
-            "uid": false
-          }
-        ],
-        "namespace": ["posts"]
-      },
-      {
-        "name": "intentions",
-        "label": "Intencje Mszalne",
-        "path": "content/intentions",
-        "fields": [
-          {
-            "type": "string",
-            "name": "week",
-            "label": "Tydzień",
-            "namespace": ["intentions", "week"],
-            "searchable": true,
-            "uid": false
-          },
           {
             "type": "object",
-            "name": "days",
-            "label": "Dni",
+            "name": "groups",
+            "label": "Grupy",
             "list": true,
+            "ui": {},
+            "indexed": true,
             "fields": [
               {
                 "type": "string",
-                "name": "date",
-                "label": "Data",
-                "namespace": ["intentions", "days", "date"],
+                "name": "title",
+                "label": "Tytuł",
+                "required": true,
+                "isTitle": true,
+                "namespace": ["navigation", "groups", "title"],
                 "searchable": true,
                 "uid": false
               },
               {
                 "type": "object",
-                "name": "masses",
-                "label": "Msze",
+                "name": "links",
+                "label": "Linki",
                 "list": true,
+                "ui": {},
+                "indexed": true,
                 "fields": [
                   {
                     "type": "string",
-                    "name": "time",
-                    "label": "Godzina",
-                    "namespace": ["intentions", "days", "masses", "time"],
+                    "name": "title",
+                    "label": "Tytuł",
+                    "required": true,
+                    "isTitle": true,
+                    "namespace": ["navigation", "groups", "links", "title"],
                     "searchable": true,
                     "uid": false
                   },
                   {
                     "type": "string",
-                    "name": "intention",
-                    "label": "Intencja",
-                    "namespace": ["intentions", "days", "masses", "intention"],
+                    "name": "path",
+                    "label": "URL",
+                    "required": true,
+                    "namespace": ["navigation", "groups", "links", "path"],
+                    "searchable": true,
+                    "uid": false
+                  },
+                  {
+                    "type": "string",
+                    "name": "description",
+                    "label": "Opis",
+                    "namespace": [
+                      "navigation",
+                      "groups",
+                      "links",
+                      "description"
+                    ],
                     "searchable": true,
                     "uid": false
                   }
                 ],
-                "namespace": ["intentions", "days", "masses"],
+                "namespace": ["navigation", "groups", "links"],
                 "searchable": true,
                 "uid": false
               }
             ],
-            "namespace": ["intentions", "days"],
+            "namespace": ["navigation", "groups"],
             "searchable": true,
             "uid": false
           }
         ],
-        "namespace": ["intentions"]
-      },
-      {
-        "name": "announcements",
-        "label": "Ogłoszenia",
-        "path": "content/announcements",
-        "fields": [
-          {
-            "type": "string",
-            "name": "title",
-            "label": "Tytuł",
-            "namespace": ["announcements", "title"],
-            "searchable": true,
-            "uid": false
-          },
-          {
-            "type": "datetime",
-            "name": "date",
-            "label": "Data",
-            "namespace": ["announcements", "date"],
-            "searchable": true,
-            "uid": false
-          },
-          {
-            "type": "rich-text",
-            "name": "content",
-            "label": "Treść",
-            "isBody": true,
-            "namespace": ["announcements", "content"],
-            "searchable": true,
-            "parser": { "type": "markdown" },
-            "uid": false
-          }
-        ],
-        "namespace": ["announcements"]
-      },
-      {
-        "name": "gallery",
-        "label": "Galeria",
-        "path": "content/gallery",
-        "fields": [
-          {
-            "type": "string",
-            "name": "title",
-            "label": "Tytuł albumu",
-            "namespace": ["gallery", "title"],
-            "searchable": true,
-            "uid": false
-          },
-          {
-            "type": "datetime",
-            "name": "date",
-            "label": "Data",
-            "namespace": ["gallery", "date"],
-            "searchable": true,
-            "uid": false
-          },
-          {
-            "type": "string",
-            "name": "description",
-            "label": "Opis",
-            "namespace": ["gallery", "description"],
-            "searchable": true,
-            "uid": false
-          },
-          {
-            "type": "object",
-            "name": "images",
-            "label": "Zdjęcia",
-            "list": true,
-            "fields": [
-              {
-                "type": "image",
-                "name": "image",
-                "label": "Zdjęcie",
-                "namespace": ["gallery", "images", "image"],
-                "searchable": false,
-                "uid": false
-              },
-              {
-                "type": "string",
-                "name": "caption",
-                "label": "Podpis",
-                "namespace": ["gallery", "images", "caption"],
-                "searchable": true,
-                "uid": false
-              }
-            ],
-            "namespace": ["gallery", "images"],
-            "searchable": true,
-            "uid": false
-          }
-        ],
-        "namespace": ["gallery"]
-      },
-      {
-        "name": "groups",
-        "label": "Wspólnoty",
-        "path": "content/groups",
-        "fields": [
-          {
-            "type": "string",
-            "name": "name",
-            "label": "Nazwa",
-            "namespace": ["groups", "name"],
-            "searchable": true,
-            "uid": false
-          },
-          {
-            "type": "rich-text",
-            "name": "description",
-            "label": "Opis",
-            "namespace": ["groups", "description"],
-            "searchable": true,
-            "parser": { "type": "markdown" },
-            "uid": false
-          },
-          {
-            "type": "image",
-            "name": "image",
-            "label": "Zdjęcie",
-            "namespace": ["groups", "image"],
-            "searchable": false,
-            "uid": false
-          },
-          {
-            "type": "object",
-            "name": "meetings",
-            "label": "Spotkania",
-            "fields": [
-              {
-                "type": "string",
-                "name": "day",
-                "label": "Dzień",
-                "namespace": ["groups", "meetings", "day"],
-                "searchable": true,
-                "uid": false
-              },
-              {
-                "type": "string",
-                "name": "time",
-                "label": "Godzina",
-                "namespace": ["groups", "meetings", "time"],
-                "searchable": true,
-                "uid": false
-              },
-              {
-                "type": "string",
-                "name": "place",
-                "label": "Miejsce",
-                "namespace": ["groups", "meetings", "place"],
-                "searchable": true,
-                "uid": false
-              }
-            ],
-            "namespace": ["groups", "meetings"],
-            "searchable": true,
-            "uid": false
-          },
-          {
-            "type": "string",
-            "name": "leader",
-            "label": "Opiekun",
-            "namespace": ["groups", "leader"],
-            "searchable": true,
-            "uid": false
-          }
-        ],
-        "namespace": ["groups"]
+        "namespace": ["navigation"]
       }
     ],
     "config": {
@@ -297,13 +98,7 @@
     "DocumentConnection": {
       "type": "DocumentConnection",
       "resolveType": "multiCollectionDocumentList",
-      "collections": [
-        "posts",
-        "intentions",
-        "announcements",
-        "gallery",
-        "groups"
-      ]
+      "collections": ["navigation"]
     },
     "Node": { "type": "Node", "resolveType": "nodeDocument" },
     "DocumentNode": {
@@ -312,65 +107,17 @@
       "createDocument": "create",
       "updateDocument": "update"
     },
-    "Posts": {
-      "type": "Posts",
+    "Navigation": {
+      "type": "Navigation",
       "resolveType": "collectionDocument",
-      "collection": "posts",
-      "createPosts": "create",
-      "updatePosts": "update"
+      "collection": "navigation",
+      "createNavigation": "create",
+      "updateNavigation": "update"
     },
-    "PostsConnection": {
-      "type": "PostsConnection",
+    "NavigationConnection": {
+      "type": "NavigationConnection",
       "resolveType": "collectionDocumentList",
-      "collection": "posts"
-    },
-    "Intentions": {
-      "type": "Intentions",
-      "resolveType": "collectionDocument",
-      "collection": "intentions",
-      "createIntentions": "create",
-      "updateIntentions": "update"
-    },
-    "IntentionsConnection": {
-      "type": "IntentionsConnection",
-      "resolveType": "collectionDocumentList",
-      "collection": "intentions"
-    },
-    "Announcements": {
-      "type": "Announcements",
-      "resolveType": "collectionDocument",
-      "collection": "announcements",
-      "createAnnouncements": "create",
-      "updateAnnouncements": "update"
-    },
-    "AnnouncementsConnection": {
-      "type": "AnnouncementsConnection",
-      "resolveType": "collectionDocumentList",
-      "collection": "announcements"
-    },
-    "Gallery": {
-      "type": "Gallery",
-      "resolveType": "collectionDocument",
-      "collection": "gallery",
-      "createGallery": "create",
-      "updateGallery": "update"
-    },
-    "GalleryConnection": {
-      "type": "GalleryConnection",
-      "resolveType": "collectionDocumentList",
-      "collection": "gallery"
-    },
-    "Groups": {
-      "type": "Groups",
-      "resolveType": "collectionDocument",
-      "collection": "groups",
-      "createGroups": "create",
-      "updateGroups": "update"
-    },
-    "GroupsConnection": {
-      "type": "GroupsConnection",
-      "resolveType": "collectionDocumentList",
-      "collection": "groups"
+      "collection": "navigation"
     }
   },
   "graphql": {
@@ -824,7 +571,7 @@
           },
           {
             "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "posts" },
+            "name": { "kind": "Name", "value": "navigation" },
             "arguments": [
               {
                 "kind": "InputValueDefinition",
@@ -839,13 +586,13 @@
               "kind": "NonNullType",
               "type": {
                 "kind": "NamedType",
-                "name": { "kind": "Name", "value": "Posts" }
+                "name": { "kind": "Name", "value": "Navigation" }
               }
             }
           },
           {
             "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "postsConnection" },
+            "name": { "kind": "Name", "value": "navigationConnection" },
             "arguments": [
               {
                 "kind": "InputValueDefinition",
@@ -892,7 +639,7 @@
                 "name": { "kind": "Name", "value": "filter" },
                 "type": {
                   "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "PostsFilter" }
+                  "name": { "kind": "Name", "value": "NavigationFilter" }
                 }
               }
             ],
@@ -900,335 +647,7 @@
               "kind": "NonNullType",
               "type": {
                 "kind": "NamedType",
-                "name": { "kind": "Name", "value": "PostsConnection" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "intentions" },
-            "arguments": [
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "relativePath" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "String" }
-                }
-              }
-            ],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "Intentions" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "intentionsConnection" },
-            "arguments": [
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "before" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "String" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "after" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "String" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "first" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "Float" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "last" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "Float" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "sort" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "String" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "filter" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "IntentionsFilter" }
-                }
-              }
-            ],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "IntentionsConnection" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "announcements" },
-            "arguments": [
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "relativePath" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "String" }
-                }
-              }
-            ],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "Announcements" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "announcementsConnection" },
-            "arguments": [
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "before" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "String" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "after" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "String" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "first" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "Float" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "last" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "Float" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "sort" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "String" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "filter" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "AnnouncementsFilter" }
-                }
-              }
-            ],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "AnnouncementsConnection" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "gallery" },
-            "arguments": [
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "relativePath" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "String" }
-                }
-              }
-            ],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "Gallery" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "galleryConnection" },
-            "arguments": [
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "before" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "String" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "after" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "String" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "first" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "Float" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "last" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "Float" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "sort" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "String" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "filter" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "GalleryFilter" }
-                }
-              }
-            ],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "GalleryConnection" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "groups" },
-            "arguments": [
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "relativePath" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "String" }
-                }
-              }
-            ],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "Groups" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "groupsConnection" },
-            "arguments": [
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "before" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "String" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "after" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "String" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "first" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "Float" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "last" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "Float" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "sort" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "String" }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "filter" },
-                "type": {
-                  "kind": "NamedType",
-                  "name": { "kind": "Name", "value": "GroupsFilter" }
-                }
-              }
-            ],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "GroupsConnection" }
+                "name": { "kind": "Name", "value": "NavigationConnection" }
               }
             }
           }
@@ -1240,42 +659,10 @@
         "fields": [
           {
             "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "posts" },
+            "name": { "kind": "Name", "value": "navigation" },
             "type": {
               "kind": "NamedType",
-              "name": { "kind": "Name", "value": "PostsFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "intentions" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "IntentionsFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "announcements" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "AnnouncementsFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "gallery" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "GalleryFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "groups" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "GroupsFilter" }
+              "name": { "kind": "Name", "value": "NavigationFilter" }
             }
           }
         ]
@@ -1527,24 +914,84 @@
         "name": { "kind": "Name", "value": "DocumentNode" },
         "directives": [],
         "types": [
-          { "kind": "NamedType", "name": { "kind": "Name", "value": "Posts" } },
           {
             "kind": "NamedType",
-            "name": { "kind": "Name", "value": "Intentions" }
-          },
-          {
-            "kind": "NamedType",
-            "name": { "kind": "Name", "value": "Announcements" }
-          },
-          {
-            "kind": "NamedType",
-            "name": { "kind": "Name", "value": "Gallery" }
-          },
-          {
-            "kind": "NamedType",
-            "name": { "kind": "Name", "value": "Groups" }
+            "name": { "kind": "Name", "value": "Navigation" }
           },
           { "kind": "NamedType", "name": { "kind": "Name", "value": "Folder" } }
+        ]
+      },
+      {
+        "kind": "ObjectTypeDefinition",
+        "interfaces": [],
+        "directives": [],
+        "name": { "kind": "Name", "value": "NavigationGroupsLinks" },
+        "fields": [
+          {
+            "kind": "FieldDefinition",
+            "name": { "kind": "Name", "value": "title" },
+            "arguments": [],
+            "type": {
+              "kind": "NonNullType",
+              "type": {
+                "kind": "NamedType",
+                "name": { "kind": "Name", "value": "String" }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "name": { "kind": "Name", "value": "path" },
+            "arguments": [],
+            "type": {
+              "kind": "NonNullType",
+              "type": {
+                "kind": "NamedType",
+                "name": { "kind": "Name", "value": "String" }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "name": { "kind": "Name", "value": "description" },
+            "arguments": [],
+            "type": {
+              "kind": "NamedType",
+              "name": { "kind": "Name", "value": "String" }
+            }
+          }
+        ]
+      },
+      {
+        "kind": "ObjectTypeDefinition",
+        "interfaces": [],
+        "directives": [],
+        "name": { "kind": "Name", "value": "NavigationGroups" },
+        "fields": [
+          {
+            "kind": "FieldDefinition",
+            "name": { "kind": "Name", "value": "title" },
+            "arguments": [],
+            "type": {
+              "kind": "NonNullType",
+              "type": {
+                "kind": "NamedType",
+                "name": { "kind": "Name", "value": "String" }
+              }
+            }
+          },
+          {
+            "kind": "FieldDefinition",
+            "name": { "kind": "Name", "value": "links" },
+            "arguments": [],
+            "type": {
+              "kind": "ListType",
+              "type": {
+                "kind": "NamedType",
+                "name": { "kind": "Name", "value": "NavigationGroupsLinks" }
+              }
+            }
+          }
         ]
       },
       {
@@ -1557,51 +1004,18 @@
           }
         ],
         "directives": [],
-        "name": { "kind": "Name", "value": "Posts" },
+        "name": { "kind": "Name", "value": "Navigation" },
         "fields": [
           {
             "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "title" },
+            "name": { "kind": "Name", "value": "groups" },
             "arguments": [],
             "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "date" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "image" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "category" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "body" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "JSON" }
+              "kind": "ListType",
+              "type": {
+                "kind": "NamedType",
+                "name": { "kind": "Name", "value": "NavigationGroups" }
+              }
             }
           },
           {
@@ -1685,127 +1099,7 @@
       },
       {
         "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "DatetimeFilter" },
-        "fields": [
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "after" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "before" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "eq" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "exists" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "Boolean" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "in" },
-            "type": {
-              "kind": "ListType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "String" }
-              }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "ImageFilter" },
-        "fields": [
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "startsWith" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "eq" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "exists" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "Boolean" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "in" },
-            "type": {
-              "kind": "ListType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "String" }
-              }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "RichTextFilter" },
-        "fields": [
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "startsWith" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "eq" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "exists" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "Boolean" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "PostsFilter" },
+        "name": { "kind": "Name", "value": "NavigationGroupsLinksFilter" },
         "fields": [
           {
             "kind": "InputValueDefinition",
@@ -1817,994 +1111,7 @@
           },
           {
             "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "date" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "DatetimeFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "image" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "ImageFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "category" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "StringFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "body" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "RichTextFilter" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "ObjectTypeDefinition",
-        "interfaces": [],
-        "directives": [],
-        "name": { "kind": "Name", "value": "PostsConnectionEdges" },
-        "fields": [
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "cursor" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "String" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "node" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "Posts" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "ObjectTypeDefinition",
-        "interfaces": [
-          {
-            "kind": "NamedType",
-            "name": { "kind": "Name", "value": "Connection" }
-          }
-        ],
-        "directives": [],
-        "name": { "kind": "Name", "value": "PostsConnection" },
-        "fields": [
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "pageInfo" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "PageInfo" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "totalCount" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "Float" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "edges" },
-            "arguments": [],
-            "type": {
-              "kind": "ListType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "PostsConnectionEdges" }
-              }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "ObjectTypeDefinition",
-        "interfaces": [],
-        "directives": [],
-        "name": { "kind": "Name", "value": "IntentionsDaysMasses" },
-        "fields": [
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "time" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "intention" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "ObjectTypeDefinition",
-        "interfaces": [],
-        "directives": [],
-        "name": { "kind": "Name", "value": "IntentionsDays" },
-        "fields": [
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "date" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "masses" },
-            "arguments": [],
-            "type": {
-              "kind": "ListType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "IntentionsDaysMasses" }
-              }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "ObjectTypeDefinition",
-        "interfaces": [
-          { "kind": "NamedType", "name": { "kind": "Name", "value": "Node" } },
-          {
-            "kind": "NamedType",
-            "name": { "kind": "Name", "value": "Document" }
-          }
-        ],
-        "directives": [],
-        "name": { "kind": "Name", "value": "Intentions" },
-        "fields": [
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "week" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "days" },
-            "arguments": [],
-            "type": {
-              "kind": "ListType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "IntentionsDays" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "id" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "ID" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "_sys" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "SystemInfo" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "_values" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "JSON" }
-              }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "IntentionsDaysMassesFilter" },
-        "fields": [
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "time" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "StringFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "intention" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "StringFilter" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "IntentionsDaysFilter" },
-        "fields": [
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "date" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "StringFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "masses" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "IntentionsDaysMassesFilter" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "IntentionsFilter" },
-        "fields": [
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "week" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "StringFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "days" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "IntentionsDaysFilter" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "ObjectTypeDefinition",
-        "interfaces": [],
-        "directives": [],
-        "name": { "kind": "Name", "value": "IntentionsConnectionEdges" },
-        "fields": [
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "cursor" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "String" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "node" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "Intentions" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "ObjectTypeDefinition",
-        "interfaces": [
-          {
-            "kind": "NamedType",
-            "name": { "kind": "Name", "value": "Connection" }
-          }
-        ],
-        "directives": [],
-        "name": { "kind": "Name", "value": "IntentionsConnection" },
-        "fields": [
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "pageInfo" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "PageInfo" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "totalCount" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "Float" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "edges" },
-            "arguments": [],
-            "type": {
-              "kind": "ListType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "IntentionsConnectionEdges" }
-              }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "ObjectTypeDefinition",
-        "interfaces": [
-          { "kind": "NamedType", "name": { "kind": "Name", "value": "Node" } },
-          {
-            "kind": "NamedType",
-            "name": { "kind": "Name", "value": "Document" }
-          }
-        ],
-        "directives": [],
-        "name": { "kind": "Name", "value": "Announcements" },
-        "fields": [
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "title" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "date" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "content" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "JSON" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "id" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "ID" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "_sys" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "SystemInfo" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "_values" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "JSON" }
-              }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "AnnouncementsFilter" },
-        "fields": [
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "title" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "StringFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "date" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "DatetimeFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "content" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "RichTextFilter" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "ObjectTypeDefinition",
-        "interfaces": [],
-        "directives": [],
-        "name": { "kind": "Name", "value": "AnnouncementsConnectionEdges" },
-        "fields": [
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "cursor" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "String" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "node" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "Announcements" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "ObjectTypeDefinition",
-        "interfaces": [
-          {
-            "kind": "NamedType",
-            "name": { "kind": "Name", "value": "Connection" }
-          }
-        ],
-        "directives": [],
-        "name": { "kind": "Name", "value": "AnnouncementsConnection" },
-        "fields": [
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "pageInfo" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "PageInfo" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "totalCount" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "Float" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "edges" },
-            "arguments": [],
-            "type": {
-              "kind": "ListType",
-              "type": {
-                "kind": "NamedType",
-                "name": {
-                  "kind": "Name",
-                  "value": "AnnouncementsConnectionEdges"
-                }
-              }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "ObjectTypeDefinition",
-        "interfaces": [],
-        "directives": [],
-        "name": { "kind": "Name", "value": "GalleryImages" },
-        "fields": [
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "image" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "caption" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "ObjectTypeDefinition",
-        "interfaces": [
-          { "kind": "NamedType", "name": { "kind": "Name", "value": "Node" } },
-          {
-            "kind": "NamedType",
-            "name": { "kind": "Name", "value": "Document" }
-          }
-        ],
-        "directives": [],
-        "name": { "kind": "Name", "value": "Gallery" },
-        "fields": [
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "title" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "date" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "description" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "images" },
-            "arguments": [],
-            "type": {
-              "kind": "ListType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "GalleryImages" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "id" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "ID" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "_sys" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "SystemInfo" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "_values" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "JSON" }
-              }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "GalleryImagesFilter" },
-        "fields": [
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "image" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "ImageFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "caption" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "StringFilter" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "GalleryFilter" },
-        "fields": [
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "title" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "StringFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "date" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "DatetimeFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "description" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "StringFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "images" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "GalleryImagesFilter" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "ObjectTypeDefinition",
-        "interfaces": [],
-        "directives": [],
-        "name": { "kind": "Name", "value": "GalleryConnectionEdges" },
-        "fields": [
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "cursor" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "String" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "node" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "Gallery" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "ObjectTypeDefinition",
-        "interfaces": [
-          {
-            "kind": "NamedType",
-            "name": { "kind": "Name", "value": "Connection" }
-          }
-        ],
-        "directives": [],
-        "name": { "kind": "Name", "value": "GalleryConnection" },
-        "fields": [
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "pageInfo" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "PageInfo" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "totalCount" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "Float" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "edges" },
-            "arguments": [],
-            "type": {
-              "kind": "ListType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "GalleryConnectionEdges" }
-              }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "ObjectTypeDefinition",
-        "interfaces": [],
-        "directives": [],
-        "name": { "kind": "Name", "value": "GroupsMeetings" },
-        "fields": [
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "day" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "time" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "place" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "ObjectTypeDefinition",
-        "interfaces": [
-          { "kind": "NamedType", "name": { "kind": "Name", "value": "Node" } },
-          {
-            "kind": "NamedType",
-            "name": { "kind": "Name", "value": "Document" }
-          }
-        ],
-        "directives": [],
-        "name": { "kind": "Name", "value": "Groups" },
-        "fields": [
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "name" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "description" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "JSON" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "image" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "meetings" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "GroupsMeetings" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "leader" },
-            "arguments": [],
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "id" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "ID" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "_sys" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "SystemInfo" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "_values" },
-            "arguments": [],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "JSON" }
-              }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "GroupsMeetingsFilter" },
-        "fields": [
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "day" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "StringFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "time" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "StringFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "place" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "StringFilter" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "GroupsFilter" },
-        "fields": [
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "name" },
+            "name": { "kind": "Name", "value": "path" },
             "type": {
               "kind": "NamedType",
               "name": { "kind": "Name", "value": "StringFilter" }
@@ -2815,31 +1122,43 @@
             "name": { "kind": "Name", "value": "description" },
             "type": {
               "kind": "NamedType",
-              "name": { "kind": "Name", "value": "RichTextFilter" }
+              "name": { "kind": "Name", "value": "StringFilter" }
             }
-          },
+          }
+        ]
+      },
+      {
+        "kind": "InputObjectTypeDefinition",
+        "name": { "kind": "Name", "value": "NavigationGroupsFilter" },
+        "fields": [
           {
             "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "image" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "ImageFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "meetings" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "GroupsMeetingsFilter" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "leader" },
+            "name": { "kind": "Name", "value": "title" },
             "type": {
               "kind": "NamedType",
               "name": { "kind": "Name", "value": "StringFilter" }
+            }
+          },
+          {
+            "kind": "InputValueDefinition",
+            "name": { "kind": "Name", "value": "links" },
+            "type": {
+              "kind": "NamedType",
+              "name": { "kind": "Name", "value": "NavigationGroupsLinksFilter" }
+            }
+          }
+        ]
+      },
+      {
+        "kind": "InputObjectTypeDefinition",
+        "name": { "kind": "Name", "value": "NavigationFilter" },
+        "fields": [
+          {
+            "kind": "InputValueDefinition",
+            "name": { "kind": "Name", "value": "groups" },
+            "type": {
+              "kind": "NamedType",
+              "name": { "kind": "Name", "value": "NavigationGroupsFilter" }
             }
           }
         ]
@@ -2848,7 +1167,7 @@
         "kind": "ObjectTypeDefinition",
         "interfaces": [],
         "directives": [],
-        "name": { "kind": "Name", "value": "GroupsConnectionEdges" },
+        "name": { "kind": "Name", "value": "NavigationConnectionEdges" },
         "fields": [
           {
             "kind": "FieldDefinition",
@@ -2868,7 +1187,7 @@
             "arguments": [],
             "type": {
               "kind": "NamedType",
-              "name": { "kind": "Name", "value": "Groups" }
+              "name": { "kind": "Name", "value": "Navigation" }
             }
           }
         ]
@@ -2882,7 +1201,7 @@
           }
         ],
         "directives": [],
-        "name": { "kind": "Name", "value": "GroupsConnection" },
+        "name": { "kind": "Name", "value": "NavigationConnection" },
         "fields": [
           {
             "kind": "FieldDefinition",
@@ -2916,7 +1235,7 @@
               "kind": "ListType",
               "type": {
                 "kind": "NamedType",
-                "name": { "kind": "Name", "value": "GroupsConnectionEdges" }
+                "name": { "kind": "Name", "value": "NavigationConnectionEdges" }
               }
             }
           }
@@ -3126,7 +1445,7 @@
           },
           {
             "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "updatePosts" },
+            "name": { "kind": "Name", "value": "updateNavigation" },
             "arguments": [
               {
                 "kind": "InputValueDefinition",
@@ -3146,7 +1465,7 @@
                   "kind": "NonNullType",
                   "type": {
                     "kind": "NamedType",
-                    "name": { "kind": "Name", "value": "PostsMutation" }
+                    "name": { "kind": "Name", "value": "NavigationMutation" }
                   }
                 }
               }
@@ -3155,13 +1474,13 @@
               "kind": "NonNullType",
               "type": {
                 "kind": "NamedType",
-                "name": { "kind": "Name", "value": "Posts" }
+                "name": { "kind": "Name", "value": "Navigation" }
               }
             }
           },
           {
             "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "createPosts" },
+            "name": { "kind": "Name", "value": "createNavigation" },
             "arguments": [
               {
                 "kind": "InputValueDefinition",
@@ -3181,7 +1500,7 @@
                   "kind": "NonNullType",
                   "type": {
                     "kind": "NamedType",
-                    "name": { "kind": "Name", "value": "PostsMutation" }
+                    "name": { "kind": "Name", "value": "NavigationMutation" }
                   }
                 }
               }
@@ -3190,287 +1509,7 @@
               "kind": "NonNullType",
               "type": {
                 "kind": "NamedType",
-                "name": { "kind": "Name", "value": "Posts" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "updateIntentions" },
-            "arguments": [
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "relativePath" },
-                "type": {
-                  "kind": "NonNullType",
-                  "type": {
-                    "kind": "NamedType",
-                    "name": { "kind": "Name", "value": "String" }
-                  }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "params" },
-                "type": {
-                  "kind": "NonNullType",
-                  "type": {
-                    "kind": "NamedType",
-                    "name": { "kind": "Name", "value": "IntentionsMutation" }
-                  }
-                }
-              }
-            ],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "Intentions" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "createIntentions" },
-            "arguments": [
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "relativePath" },
-                "type": {
-                  "kind": "NonNullType",
-                  "type": {
-                    "kind": "NamedType",
-                    "name": { "kind": "Name", "value": "String" }
-                  }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "params" },
-                "type": {
-                  "kind": "NonNullType",
-                  "type": {
-                    "kind": "NamedType",
-                    "name": { "kind": "Name", "value": "IntentionsMutation" }
-                  }
-                }
-              }
-            ],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "Intentions" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "updateAnnouncements" },
-            "arguments": [
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "relativePath" },
-                "type": {
-                  "kind": "NonNullType",
-                  "type": {
-                    "kind": "NamedType",
-                    "name": { "kind": "Name", "value": "String" }
-                  }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "params" },
-                "type": {
-                  "kind": "NonNullType",
-                  "type": {
-                    "kind": "NamedType",
-                    "name": { "kind": "Name", "value": "AnnouncementsMutation" }
-                  }
-                }
-              }
-            ],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "Announcements" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "createAnnouncements" },
-            "arguments": [
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "relativePath" },
-                "type": {
-                  "kind": "NonNullType",
-                  "type": {
-                    "kind": "NamedType",
-                    "name": { "kind": "Name", "value": "String" }
-                  }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "params" },
-                "type": {
-                  "kind": "NonNullType",
-                  "type": {
-                    "kind": "NamedType",
-                    "name": { "kind": "Name", "value": "AnnouncementsMutation" }
-                  }
-                }
-              }
-            ],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "Announcements" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "updateGallery" },
-            "arguments": [
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "relativePath" },
-                "type": {
-                  "kind": "NonNullType",
-                  "type": {
-                    "kind": "NamedType",
-                    "name": { "kind": "Name", "value": "String" }
-                  }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "params" },
-                "type": {
-                  "kind": "NonNullType",
-                  "type": {
-                    "kind": "NamedType",
-                    "name": { "kind": "Name", "value": "GalleryMutation" }
-                  }
-                }
-              }
-            ],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "Gallery" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "createGallery" },
-            "arguments": [
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "relativePath" },
-                "type": {
-                  "kind": "NonNullType",
-                  "type": {
-                    "kind": "NamedType",
-                    "name": { "kind": "Name", "value": "String" }
-                  }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "params" },
-                "type": {
-                  "kind": "NonNullType",
-                  "type": {
-                    "kind": "NamedType",
-                    "name": { "kind": "Name", "value": "GalleryMutation" }
-                  }
-                }
-              }
-            ],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "Gallery" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "updateGroups" },
-            "arguments": [
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "relativePath" },
-                "type": {
-                  "kind": "NonNullType",
-                  "type": {
-                    "kind": "NamedType",
-                    "name": { "kind": "Name", "value": "String" }
-                  }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "params" },
-                "type": {
-                  "kind": "NonNullType",
-                  "type": {
-                    "kind": "NamedType",
-                    "name": { "kind": "Name", "value": "GroupsMutation" }
-                  }
-                }
-              }
-            ],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "Groups" }
-              }
-            }
-          },
-          {
-            "kind": "FieldDefinition",
-            "name": { "kind": "Name", "value": "createGroups" },
-            "arguments": [
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "relativePath" },
-                "type": {
-                  "kind": "NonNullType",
-                  "type": {
-                    "kind": "NamedType",
-                    "name": { "kind": "Name", "value": "String" }
-                  }
-                }
-              },
-              {
-                "kind": "InputValueDefinition",
-                "name": { "kind": "Name", "value": "params" },
-                "type": {
-                  "kind": "NonNullType",
-                  "type": {
-                    "kind": "NamedType",
-                    "name": { "kind": "Name", "value": "GroupsMutation" }
-                  }
-                }
-              }
-            ],
-            "type": {
-              "kind": "NonNullType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "Groups" }
+                "name": { "kind": "Name", "value": "Navigation" }
               }
             }
           }
@@ -3482,42 +1521,10 @@
         "fields": [
           {
             "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "posts" },
+            "name": { "kind": "Name", "value": "navigation" },
             "type": {
               "kind": "NamedType",
-              "name": { "kind": "Name", "value": "PostsMutation" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "intentions" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "IntentionsMutation" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "announcements" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "AnnouncementsMutation" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "gallery" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "GalleryMutation" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "groups" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "GroupsMutation" }
+              "name": { "kind": "Name", "value": "NavigationMutation" }
             }
           },
           {
@@ -3536,49 +1543,17 @@
         "fields": [
           {
             "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "posts" },
+            "name": { "kind": "Name", "value": "navigation" },
             "type": {
               "kind": "NamedType",
-              "name": { "kind": "Name", "value": "PostsMutation" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "intentions" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "IntentionsMutation" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "announcements" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "AnnouncementsMutation" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "gallery" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "GalleryMutation" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "groups" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "GroupsMutation" }
+              "name": { "kind": "Name", "value": "NavigationMutation" }
             }
           }
         ]
       },
       {
         "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "PostsMutation" },
+        "name": { "kind": "Name", "value": "NavigationGroupsLinksMutation" },
         "fields": [
           {
             "kind": "InputValueDefinition",
@@ -3590,7 +1565,7 @@
           },
           {
             "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "date" },
+            "name": { "kind": "Name", "value": "path" },
             "type": {
               "kind": "NamedType",
               "name": { "kind": "Name", "value": "String" }
@@ -3598,45 +1573,7 @@
           },
           {
             "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "image" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "category" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "body" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "JSON" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "IntentionsDaysMassesMutation" },
-        "fields": [
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "time" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "intention" },
+            "name": { "kind": "Name", "value": "description" },
             "type": {
               "kind": "NamedType",
               "name": { "kind": "Name", "value": "String" }
@@ -3646,11 +1583,11 @@
       },
       {
         "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "IntentionsDaysMutation" },
+        "name": { "kind": "Name", "value": "NavigationGroupsMutation" },
         "fields": [
           {
             "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "date" },
+            "name": { "kind": "Name", "value": "title" },
             "type": {
               "kind": "NamedType",
               "name": { "kind": "Name", "value": "String" }
@@ -3658,14 +1595,14 @@
           },
           {
             "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "masses" },
+            "name": { "kind": "Name", "value": "links" },
             "type": {
               "kind": "ListType",
               "type": {
                 "kind": "NamedType",
                 "name": {
                   "kind": "Name",
-                  "value": "IntentionsDaysMassesMutation"
+                  "value": "NavigationGroupsLinksMutation"
                 }
               }
             }
@@ -3674,194 +1611,17 @@
       },
       {
         "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "IntentionsMutation" },
+        "name": { "kind": "Name", "value": "NavigationMutation" },
         "fields": [
           {
             "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "week" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "days" },
+            "name": { "kind": "Name", "value": "groups" },
             "type": {
               "kind": "ListType",
               "type": {
                 "kind": "NamedType",
-                "name": { "kind": "Name", "value": "IntentionsDaysMutation" }
+                "name": { "kind": "Name", "value": "NavigationGroupsMutation" }
               }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "AnnouncementsMutation" },
-        "fields": [
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "title" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "date" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "content" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "JSON" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "GalleryImagesMutation" },
-        "fields": [
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "image" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "caption" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "GalleryMutation" },
-        "fields": [
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "title" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "date" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "description" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "images" },
-            "type": {
-              "kind": "ListType",
-              "type": {
-                "kind": "NamedType",
-                "name": { "kind": "Name", "value": "GalleryImagesMutation" }
-              }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "GroupsMeetingsMutation" },
-        "fields": [
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "day" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "time" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "place" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          }
-        ]
-      },
-      {
-        "kind": "InputObjectTypeDefinition",
-        "name": { "kind": "Name", "value": "GroupsMutation" },
-        "fields": [
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "name" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "description" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "JSON" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "image" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "meetings" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "GroupsMeetingsMutation" }
-            }
-          },
-          {
-            "kind": "InputValueDefinition",
-            "name": { "kind": "Name", "value": "leader" },
-            "type": {
-              "kind": "NamedType",
-              "name": { "kind": "Name", "value": "String" }
             }
           }
         ]
