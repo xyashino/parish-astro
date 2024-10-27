@@ -1,5 +1,5 @@
 import { defineConfig } from 'tinacms'
-import { navigationCollection } from './collections'
+import { contactCollection, navigationCollection } from './collections'
 
 const branch =
   process.env.GITHUB_BRANCH ||
@@ -24,6 +24,6 @@ export default defineConfig({
     }
   },
   schema: {
-    collections: [navigationCollection]
+    collections: [navigationCollection, contactCollection]
   }
 })

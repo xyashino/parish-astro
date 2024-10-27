@@ -1,0 +1,18 @@
+---
+type Props = {
+  googleMapsUrl: string
+}
+
+const { googleMapsUrl } = Astro.props as Props
+---
+
+<div class='lg:col-span-2'>
+  <iframe
+    src={googleMapsUrl}
+    class='h-[400px] w-full'
+    style='border: 0'
+    allowfullscreen
+    loading='lazy'
+    referrerpolicy='no-referrer-when-downgrade'
+    title='Google Maps'></iframe>
+</div>

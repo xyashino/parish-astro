@@ -1,0 +1,30 @@
+---
+import ContactGoogleMap from '@/components/contact/ContactGoogleMap.astro'
+import ContactItem from '@/components/contact/ContactItem.astro'
+import { getContact } from '@/services/get-contact'
+import BaseLayout from '../layouts/BaseLayout.astro'
+
+const { title, description, groups, googleMapsUrl } = await getContact()
+---
+
+<BaseLayout title='Contact' description='Contact us'>
+  <section class='animate-fadeIn my-auto h-full bg-background'>
+    <div class='container mx-auto'>
+      <header class='mx-auto mb-6 w-full max-w-3xl sm:mb-8'>
+        <h2
+          class='text-theme-foreground font-serif text-2xl font-medium leading-tight sm:text-4xl'
+        >
+          {title}
+        </h2>
+
+        <p class='mt-1 text-sm leading-tight'>{description}</p>
+      </header>
+      <div class='mt-6 flex flex-col'>
+        <div class='flex flex-col divide-y divide-foreground'>
+          {groups?.map(group => <ContactItem {...group} />)}
+        </div>
+        <ContactGoogleMap googleMapsUrl={googleMapsUrl ?? ''} />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
