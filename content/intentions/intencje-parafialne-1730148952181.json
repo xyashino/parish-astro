@@ -5,6 +5,10 @@
     {
       "hour": "09:00",
       "intention": "test\n"
+    },
+    {
+      "hour": "10:00",
+      "intention": "**Test sadsad**\n"
     }
   ],
   "day_1": [
