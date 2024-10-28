@@ -140,5 +140,6 @@ module.exports = {
       })
     }
   },
+  safelist: ['p-4'],
   plugins: [require('@tailwindcss/typography'), require('tailwindcss-animate')]
 }

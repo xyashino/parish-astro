@@ -1,0 +1,50 @@
+{
+  "title": "Intencje parafialne",
+  "startDate": "2024-10-28T20:54:50.739Z",
+  "day_0": [
+    {
+      "hour": "09:00",
+      "intention": "test\n"
+    },
+    {
+      "hour": "10:00",
+      "intention": "**Test sadsad**\n"
+    }
+  ],
+  "day_1": [
+    {
+      "hour": "10:00",
+      "intention": ""
+    }
+  ],
+  "day_2": [
+    {
+      "hour": "11:00",
+      "intention": ""
+    }
+  ],
+  "day_3": [
+    {
+      "hour": "12:00",
+      "intention": ""
+    }
+  ],
+  "day_4": [
+    {
+      "hour": "13:00",
+      "intention": ""
+    }
+  ],
+  "day_5": [
+    {
+      "hour": "14:00",
+      "intention": ""
+    }
+  ],
+  "day_6": [
+    {
+      "hour": "15:00",
+      "intention": ""
+    }
+  ]
+}
